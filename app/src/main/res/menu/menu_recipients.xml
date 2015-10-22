@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+         xmlns:tools="http://schemas.android.com/tools"
+         tools:context=".RecipientsActivity">
+
+    <item android:id="@+id/action_send"
+             android:title="@string/menu_send_label"
+              android:icon="@mipmap/social_send_now"
+              app:showAsAction="always" />
+        <!-- For whatever reason, we have to use android here -->
+
+</menu>

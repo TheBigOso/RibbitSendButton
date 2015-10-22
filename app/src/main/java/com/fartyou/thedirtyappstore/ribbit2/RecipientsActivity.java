@@ -2,6 +2,7 @@ package com.fartyou.thedirtyappstore.ribbit2;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
@@ -48,9 +50,17 @@ public class RecipientsActivity extends ListActivity {
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
 
-        mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+//        mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+//            @Override
+//            public void done(List<ParseUser> friends, ParseException e) {
+        ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
+        query.addAscendingOrder(ParseConstants.KEY_USERNAME);
+        query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
+                setProgressBarIndeterminateVisibility(false);
+
+
 
                 if (e == null) {
                     mFriends = friends;
@@ -79,8 +89,56 @@ public class RecipientsActivity extends ListActivity {
         });
     }
 
+    private void setupActionBar() {
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_recipients, menu);
+        mSendMenuItem = menu.getItem(0);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This ID represents the Home or Up button. In the case of this
+                // activity, the Up button is shown. Use NavUtils to allow users
+                // to navigate up one level in the application structure. For
+                // more details, see the Navigation pattern on Android Design:
+                //
+                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+                //
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_send:
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        if (l.getCheckedItemCount() > 0) {
+            mSendMenuItem.setVisible(true);
+        }
+        else {
+            mSendMenuItem.setVisible(false);
+        }
+    }
 
 
+}
+//
+//
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        mSendMenuItem =menu.getItem(0);
@@ -94,4 +152,3 @@ public class RecipientsActivity extends ListActivity {
 //        mSendMenuItem.setVisible(true);
 //  }
 //}
-}

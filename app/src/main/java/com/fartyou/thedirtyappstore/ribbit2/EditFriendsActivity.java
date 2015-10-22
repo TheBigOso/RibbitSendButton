@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,17 +18,14 @@ import com.parse.SaveCallback;
 
 import java.util.List;
 
-//old ListActivity {
 
-public class EditFriendsActivity extends AppCompatActivity {
-
+//AppCompatActivity
+public class EditFriendsActivity extends ListActivity {
     public static final String TAG = EditFriendsActivity.class.getSimpleName();
 
     protected List<ParseUser> mUsers;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
-    private ListView mListView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +33,7 @@ public class EditFriendsActivity extends AppCompatActivity {
         requestWindowFeature(getWindow().FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_edit_friends);
 
-
-
-//        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        mListView = (ListView) findViewById(R.id.edit_friends_listview);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     @Override
@@ -75,8 +66,7 @@ public class EditFriendsActivity extends AppCompatActivity {
                             EditFriendsActivity.this,
                             android.R.layout.simple_list_item_checked,
                             usernames);
-                    mListView.setAdapter(adapter);
-//                    setListAdapter(adapter);
+                    setListAdapter(adapter);
 
                     addFriendCheckmarks();
 
@@ -92,54 +82,30 @@ public class EditFriendsActivity extends AppCompatActivity {
 
             }
         });
-
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (mListView.isItemChecked(position)) {
-                    mFriendsRelation.add(mUsers.get(position));
-                } else {
-                    //remove friend
-                    mFriendsRelation.remove(mUsers.get(position));
-                }
-                mCurrentUser.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            //success
-                        } else {
-                            Log.e(TAG, e.getMessage());
-                        }
-                    }
-                });
-            }
-        });
-        mListView.setEmptyView((View) findViewById(R.id.edit_friends_empty));
     }
 
-//    @Override
-//    protected void onListItemClick(ListView l, View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//
-//        if(getListView().isItemChecked(position)){
-//            //add friend
-//            mFriendsRelation.add(mUsers.get(position));
-//        }
-//        else {
-//            //remove friend
-//            mFriendsRelation.remove(mUsers.get(position));
-//
-//        }
-//        mCurrentUser.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e != null) {
-//                    Log.e(TAG, e.getMessage());
-//                }
-//            }
-//        });
-//    }
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        if(getListView().isItemChecked(position)){
+            //add friend
+            mFriendsRelation.add(mUsers.get(position));
+        }
+        else {
+            //remove friend
+            mFriendsRelation.remove(mUsers.get(position));
+
+        }
+        mCurrentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+    }
     private void addFriendCheckmarks(){
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
@@ -151,9 +117,7 @@ public class EditFriendsActivity extends AppCompatActivity {
 
                         for(ParseUser friend : friends){
                             if(friend.getObjectId().equals(user.getObjectId())){
-
-                                mListView.setItemChecked(i, true);
-//                                getListView().setItemChecked(i, true);
+                                getListView().setItemChecked(i, true);
                             }
                         }
                     }
