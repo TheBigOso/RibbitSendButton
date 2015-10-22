@@ -58,6 +58,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".RecipientsActivity"
+                  android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
                   android:screenOrientation="portrait">
         </activity>
     </application>
