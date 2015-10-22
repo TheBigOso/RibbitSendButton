@@ -8,6 +8,7 @@
              android:title="@string/menu_send_label"
               android:icon="@mipmap/social_send_now"
               app:showAsAction="always" />
-        <!-- For whatever reason, we have to use android here -->
+        <!-- For whatever reason, we have to use android here  for the icon use android:showAsAction="always"-->
+
 
 </menu>
