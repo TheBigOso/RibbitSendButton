@@ -7,7 +7,7 @@
     <item android:id="@+id/action_send"
              android:title="@string/menu_send_label"
               android:icon="@mipmap/social_send_now"
-              app:showAsAction="always" />
+              android:showAsAction="always" />
         <!-- For whatever reason, we have to use android here  for the icon use android:showAsAction="always"-->
 
 

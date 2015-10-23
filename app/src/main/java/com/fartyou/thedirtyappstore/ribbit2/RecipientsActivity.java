@@ -2,6 +2,7 @@ package com.fartyou.thedirtyappstore.ribbit2;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +16,12 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipientsActivity extends ListActivity {
@@ -27,8 +30,9 @@ public class RecipientsActivity extends ListActivity {
     protected List<ParseUser> mFriends;
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
-
     protected MenuItem mSendMenuItem;
+    protected Uri mMediaUri;
+    protected String mfileType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class RecipientsActivity extends ListActivity {
 
         getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+        mMediaUri = getIntent().getData();
+        mfileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
 
     }
 
@@ -59,7 +65,6 @@ public class RecipientsActivity extends ListActivity {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
                 setProgressBarIndeterminateVisibility(false);
-
 
 
                 if (e == null) {
@@ -117,6 +122,8 @@ public class RecipientsActivity extends ListActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_send:
+                ParseObject message = createMessage();
+              //  send(message);
 
                 return true;
         }
@@ -135,6 +142,27 @@ public class RecipientsActivity extends ListActivity {
         }
     }
 
+             protected ParseObject createMessage() {
+                 ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
+                 message.put(ParseConstants.KEY_SENDER_ID,ParseUser.getCurrentUser().getObjectId());
+                 message.put(ParseConstants.KEY_SENDER_NAME,ParseUser.getCurrentUser().getUsername());
+                 message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientsIds());
+                 message.put(ParseConstants.KEY_FILE_TYPE, mfileType);
+
+                 byte[] fileBytes
+
+                 return message;
+             }
+    protected ArrayList<String> getRecipientsIds(){
+        ArrayList<String> recipientsIds = new ArrayList<String>();
+        for (int i=0; i < getListView().getCount(); i++){
+            if(getListView().isItemChecked(i)){
+                recipientsIds.add(mFriends.get(i).getObjectId());
+
+            }
+        }
+        return recipientsIds;
+    }
 
 }
 //
