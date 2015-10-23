@@ -208,18 +208,4 @@ public class RecipientsActivity extends ListActivity {
     }
 
 }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        mSendMenuItem =menu.getItem(0);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//  @Override
-//    protected void onListItemClick(ListView l, View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//
-//        mSendMenuItem.setVisible(true);
-//  }
-//}
+

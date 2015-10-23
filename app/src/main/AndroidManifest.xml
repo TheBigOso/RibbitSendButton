@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -57,10 +56,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:name=".RecipientsActivity"
-                  android:screenOrientation="portrait"
-                  >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
+        </activity>
+        <activity android:name=".ViewImageActivity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 
