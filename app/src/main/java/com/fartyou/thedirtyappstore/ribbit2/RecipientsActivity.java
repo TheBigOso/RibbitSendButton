@@ -13,13 +13,16 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,8 +126,17 @@ public class RecipientsActivity extends ListActivity {
                 return true;
             case R.id.action_send:
                 ParseObject message = createMessage();
-              //  send(message);
-
+                if(message == null){
+                    //error
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage(R.string.error_selecting_file).setTitle(R.string.error_selecting_file_title).setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else {
+                    send(message);
+                    finish();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -149,9 +161,20 @@ public class RecipientsActivity extends ListActivity {
                  message.put(ParseConstants.KEY_RECIPIENT_IDS, getRecipientsIds());
                  message.put(ParseConstants.KEY_FILE_TYPE, mfileType);
 
-                 byte[] fileBytes
+                 byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
 
-                 return message;
+                 if (fileBytes == null){
+                     return null;
+                 }
+                 else {
+                     if (mfileType.equals(ParseConstants.TYPE_IMAGE)) {
+                         fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+                     }
+                     String fileName = FileHelper.getFileName(this, mMediaUri, mfileType);
+                     ParseFile file = new ParseFile(fileName, fileBytes);
+                     message.put(ParseConstants.KEY_FILE, file);
+                     return message;
+                 }
              }
     protected ArrayList<String> getRecipientsIds(){
         ArrayList<String> recipientsIds = new ArrayList<String>();
@@ -162,6 +185,26 @@ public class RecipientsActivity extends ListActivity {
             }
         }
         return recipientsIds;
+    }
+
+    protected void  send(ParseObject message){
+        message.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+
+                    //successful
+                    Toast.makeText(RecipientsActivity.this, R.string.success_message, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
+                    builder.setMessage(R.string.success_sending_message).setTitle(R.string.error_selecting_file_title).setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+            }
+        });
     }
 
 }

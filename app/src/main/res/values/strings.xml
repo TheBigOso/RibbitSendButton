@@ -35,6 +35,10 @@
     <string name="error_file_size_to_large">The Selected field is to large. Please select a new file.</string>
     <string name="empty_recipients_list_message">Choose some friends first</string>
     <string name="menu_send_label">Send</string>
+    <string name="error_selecting_file">"There was an error with the file selected. Please choose a different file."</string>
+    <string name="error_selecting_file_title">"We're sorry!"</string>
+    <string name="success_message">"Message sent!"</string>
+    <string name="success_sending_message">"There was an error sending your message. Please try again."</string>
 
     <string-array name = "camera_choices">
         <item>Take Picture</item>
