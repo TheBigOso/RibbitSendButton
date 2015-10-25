@@ -328,16 +328,19 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                break;
 
             case R.id.action_edit_friends:
                  intent = new Intent(this, EditFriendsActivity.class);
                  startActivity(intent);
+                break;
 
             case R.id.action_camera:
                  AlertDialog.Builder builder = new AlertDialog.Builder(this);
                  builder.setItems(R.array.camera_choices, mDialogListener);
                  AlertDialog dialog = builder.create();
                  dialog.show();
+                break;
         }
 
 
