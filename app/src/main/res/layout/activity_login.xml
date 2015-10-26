@@ -88,7 +88,9 @@
             android:layout_height="wrap_content"
             android:text="@string/login_button_label"
             android:layout_below="@+id/editTextLayout"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_custom"
+            android:textColor="#5c3e85"/>
 
 
     </LinearLayout>
