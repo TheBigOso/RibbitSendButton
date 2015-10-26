@@ -1,7 +1,9 @@
 package com.fartyou.thedirtyappstore.ribbit2;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
+//ActionBarActivity
 public class LoginActivity extends AppCompatActivity {
 
     protected EditText mUsername;
@@ -24,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        ActionBar actionBar = getActionBar();
+//        actionBar.hide();
 
         //This is where a new user would click on the sign up text button and it will move them to sign up activity
         mSignUpTextView = (TextView)findViewById(R.id.signUpText);

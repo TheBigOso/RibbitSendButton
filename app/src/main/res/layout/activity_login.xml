@@ -4,48 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_fill"
     tools:context="com.fartyou.thedirtyappstore.ribbit2.LoginActivity">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/usernameField"
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint = "@string/username_hint"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passwordField"
-        android:layout_below="@+id/usernameField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/password_hint"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_button_label"
-        android:id="@+id/LoginButton"
-        android:layout_below="@+id/passwordField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
+        android:adjustViewBounds="false"
+        android:background="@drawable/background"
+        android:contentDescription="@string/content_disctiption_bacground_image"
+        android:scaleType="fitStart"/>
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:text="Cave Rock Tech Project"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/editTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subtitle"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/login_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:baselineAligned="false"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/usernameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username_hint"
+            android:paddingLeft="@dimen/login_horizontal_padding"
+            android:paddingRight="@dimen/login_horizontal_padding"
+            android:paddingTop="@dimen/login_vertical_padding"
+            android:paddingBottom="@dimen/login_vertical_padding"
+            android:textSize="18sp"
+            />
+
+        <EditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/login_horizontal_padding"
+            android:paddingRight="@dimen/login_horizontal_padding"
+            android:paddingTop="@dimen/login_vertical_padding"
+            android:paddingBottom="@dimen/login_vertical_padding"
+            android:textSize="18sp"
+            />
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_button_label"
+            android:layout_below="@+id/editTextLayout"
+            android:layout_centerHorizontal="true"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up_text"
-        android:id="@+id/signUpText"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-       />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_centerHorizontal="true"/>
+
+
 </RelativeLayout>

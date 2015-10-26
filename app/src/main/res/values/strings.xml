@@ -14,7 +14,7 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="login_button_label">Login</string>
-    <string name="sign_up_text">Sign Up!</string>
+    <string name="sign_up_text">Don\'t Have An Account? Sign Up!</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="email_hint">Email</string>
     <string name="sign_up_button_label">Sign Up</string>
@@ -39,6 +39,7 @@
     <string name="error_selecting_file_title">"We're sorry!"</string>
     <string name="success_message">"Message sent!"</string>
     <string name="success_sending_message">"There was an error sending your message. Please try again."</string>
+    <string name="content_disctiption_bacground_image">"Ribbit Frog Background Image"</string>
 
     <string-array name = "camera_choices">
         <item>Take Picture</item>
